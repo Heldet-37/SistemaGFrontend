@@ -1,0 +1,26 @@
+/* src/styles.css */
+
+/* Resetando alguns estilos padrão */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+/* Estilos para dispositivos maiores */
+@media (min-width: 601px) {
+    body {
+        padding: 20px; /* Preenchimento em telas maiores */
+    }
+}
+
+/* Estilos para dispositivos menores */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Preenchimento em telas menores */
+    }
+}
+

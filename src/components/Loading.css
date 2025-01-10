@@ -1,0 +1,31 @@
+/* src/components/Loading.css */
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Preenche a altura da tela */
+    background-color: #f4f4f4; /* Cor de fundo */
+    font-family: Arial, sans-serif; /* Fonte da mensagem */
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Cor do fundo */
+    border-top: 8px solid #3498db; /* Cor da borda de cima */
+    border-radius: 50%; /* Círculo */
+    width: 60px; /* Largura do círculo */
+    height: 60px; /* Altura do círculo */
+    animation: spin 2s linear infinite; /* Animação de rotação */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+    margin-top: 15px; /* Espaçamento acima da mensagem */
+    font-size: 18px; /* Tamanho da fonte da mensagem */
+    color: #333; /* Cor da mensagem */
+}

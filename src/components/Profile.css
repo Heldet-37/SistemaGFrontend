@@ -1,0 +1,42 @@
+/* Profile.css */
+
+.profile {
+    background-color: #f9f9f9; /* Fundo claro para o perfil */
+    padding: 15px; /* Padding interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    margin-bottom: 20px; /* Espaço abaixo do perfil */
+}
+
+.profile h2 {
+    margin-top: 0; /* Remove margem superior do título do perfil */
+}
+
+.profile p {
+    margin: 5px 0; /* Margem vertical entre os parágrafos */
+}
+
+/* Estilo dos inputs */
+.profile input[type="text"],
+.profile input[type="email"] {
+    width: 100%; /* Largura total dos inputs */
+    padding: 10px; /* Padding interno */
+    margin: 5px 0; /* Margem entre os inputs */
+    border: 1px solid #ccc; /* Borda leve */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+/* Botão para editar o perfil */
+.edit-profile-button {
+    background-color: #007bff; /* Cor do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 10px 15px; /* Padding do botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+}
+
+/* Efeito de hover para o botão de editar perfil */
+.edit-profile-button:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}

@@ -1,0 +1,14 @@
+/* src/pages/AdminDashboard.css */
+
+.dashboard-container {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+@media (max-width: 600px) {
+    .dashboard-container {
+        padding: 10px; /* Reduzir o preenchimento em telas menores */
+    }
+}
+
+

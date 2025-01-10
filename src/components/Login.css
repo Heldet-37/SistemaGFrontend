@@ -1,0 +1,181 @@
+/* src/pages/Login.css */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Preenche a altura da tela */
+    background-color: #f4f4f4; /* Cor de fundo */
+}
+
+.login-form {
+    background-color: #fff;
+    padding: 30px; /* Aumenta o padding */
+    border-radius: 12px; /* Arredonda mais os cantos */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais forte */
+    width: 300px; /* Largura fixa */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo */
+    animation: slideIn 0.5s ease; /* Animação ao aparecer */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px); /* Começa acima */
+        opacity: 0; /* Começa invisível */
+    }
+    to {
+        transform: translateY(0); /* Termina na posição original */
+        opacity: 1; /* Torna-se visível */
+    }
+}
+
+.login-form h2 {
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    font-size: 24px; /* Tamanho da fonte do título */
+    color: #333; /* Cor do texto */
+    text-shadow: 0 0 5px rgba(0, 123, 255, 0.7); /* Brilho no título */
+}
+
+.input-container {
+    position: relative; /* Para posicionar o ícone */
+    width: 100%; /* Para ocupar toda a largura */
+    margin-bottom: 15px; /* Espaçamento entre os inputs */
+}
+
+.login-form input {
+    padding: 12px 15px; /* Padding uniforme para ambos os inputs */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Faz o input ocupar toda a largura */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave para a borda e sombra */
+    font-size: 16px; /* Tamanho da fonte do input */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+    animation: rollIn 0.4s forwards; /* Animação de rolar ao aparecer */
+}
+
+@keyframes rollIn {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.login-form input:focus {
+    border-color: #007bff; /* Muda a cor da borda ao focar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra sutil */
+    outline: none; /* Remove a borda padrão */
+    background-color: #e8f0fe; /* Cor de fundo ao focar */
+}
+
+.login-form input:not(:placeholder-shown) {
+    background-color: #e6f7ff; /* Cor de fundo ao preencher */
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+.login-form button {
+    padding: 12px;
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Gradiente no botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Remove borda padrão */
+    border-radius: 4px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro */
+    width: 100%; /* Faz o botão ocupar toda a largura */
+    font-size: 16px; /* Aumenta o tamanho da fonte do botão */
+    transition: background 0.5s, transform 0.2s; /* Transição suave para a cor de fundo e transformação */
+}
+
+.login-form button:disabled {
+    background-color: #007bff; /* Cor do botão quando desabilitado */
+    opacity: 0.7; /* Diminui a opacidade do botão quando desabilitado */
+    cursor: not-allowed; /* Muda o cursor para indicar que está desabilitado */
+}
+
+.login-form button:hover:not(:disabled) {
+    background: linear-gradient(90deg, #0056b3, #007bff); /* Inverte o gradiente ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento de tamanho */
+}
+
+.login-form button:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7); /* Brilho ao focar */
+    outline: none; /* Remove a borda padrão */
+}
+
+/* Ícones dentro do input */
+.input-icon {
+    position: absolute; /* Posiciona o ícone no campo */
+    right: 15px; /* Alinhamento à direita */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta a posição */
+    color: #999; /* Cor do ícone */
+    font-size: 18px; /* Tamanho do ícone */
+}
+
+/* Estilo para o placeholder */
+.login-form input::placeholder {
+    color: #999; /* Cor do placeholder */
+    opacity: 1; /* Garantir que o placeholder esteja visível */
+    text-align: left; /* Alinhamento do texto do placeholder */
+}
+
+.login-form input:focus::placeholder {
+    color: #007bff; /* Muda a cor do placeholder ao focar */
+    opacity: 0.5; /* Diminui a opacidade */
+}
+
+/* Consultas de mídia para responsividade */
+@media (max-width: 480px) {
+    .login-form {
+        width: 90%; /* Largura maior em telas pequenas */
+    }
+
+    .login-form h2 {
+        font-size: 20px; /* Tamanho do título em telas pequenas */
+    }
+
+    .login-form button {
+        font-size: 14px; /* Tamanho do botão em telas pequenas */
+    }
+}
+
+.error-message {
+    color: red; /* Cor de erro */
+    font-size: 14px; /* Tamanho da fonte */
+    animation: shake 0.5s; /* Animação de shake */
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Indicador de força da senha */
+.password-strength {
+    height: 5px; /* Altura do indicador */
+    border-radius: 4px; /* Bordas arredondadas */
+    transition: width 0.3s; /* Transição suave */
+}
+
+.weak {
+    background-color: red;
+    width: 30%; /* Indicador fraco */
+}
+
+.medium {
+    background-color: orange;
+    width: 60%; /* Indicador médio */
+}
+
+.strong {
+    background-color: green;
+    width: 100%; /* Indicador forte */
+}

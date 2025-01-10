@@ -1,0 +1,49 @@
+.alerts {
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.alerts h2 {
+  margin-bottom: 10px;
+}
+
+.alerts-list {
+  max-height: 100px; 
+  overflow-y: auto; 
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.alerts-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alerts-list li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  background-color: #ffeb3b;
+  color: #333; 
+}
+
+.alerts-list li:last-child {
+  border-bottom: none; 
+}
+
+.alerts-list li.alert-info {
+  background-color: #ffeb3b; 
+  color: #333; 
+}
+
+.alerts-list li.alert-error {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+.alerts-list li.alert-success {
+  background-color: #4caf50;
+  color: #ffffff;
+}

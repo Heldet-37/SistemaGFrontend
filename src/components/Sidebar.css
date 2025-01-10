@@ -1,0 +1,47 @@
+/* src/components/Sidebar.css */
+.sidebar {
+    width: 250px;
+    background-color: #343a40; /* Cor de fundo escura */
+    color: darkcyan; /* Texto branco */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease; /* Transição suave */
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #f8f9fa; /* Cor do título */
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    padding: 15px 10px; /* Aumentar espaço em cima e embaixo */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição para fundo ao passar o mouse */
+    display: flex;
+    align-items: center; /* Centralizar ícones e texto verticalmente */
+  }
+  
+  .sidebar li i {
+    margin-right: 10px; /* Espaçamento entre ícone e texto */
+  }
+  
+  .sidebar li:hover {
+    background-color: #495057; /* Cor de fundo ao passar o mouse */
+    border-radius: 5px; /* Bordas arredondadas */
+  }
+  
+  .sidebar li:hover i {
+    color: #ffc107; /* Mudar a cor do ícone ao passar o mouse */
+  }
+  
+  .sidebar li:last-child {
+    margin-top: auto; /* Empurrar o logout para o fundo */
+    font-weight: bold; /* Destacar o botão de logout */
+  }
+  

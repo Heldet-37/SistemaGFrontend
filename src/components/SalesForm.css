@@ -1,0 +1,99 @@
+/* Sales Form Container */
+.sales-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Labels */
+  .sales-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  /* Input Fields */
+  .sales-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .sales-form input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+  }
+  
+  /* Product List */
+  .product-list {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-item {
+    padding: 12px 15px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .product-item:hover {
+    background-color: #f5f8ff;
+  }
+  
+  .product-item:not(:last-child) {
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* Submit Button */
+  .sales-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .sales-form button:hover {
+    background-color: #357abd;
+  }
+  
+  .sales-form button:active {
+    transform: translateY(1px);
+  }
+  
+  /* Number Input Specific Styles */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Error Message */
+  .error-message {
+    color: #999;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
