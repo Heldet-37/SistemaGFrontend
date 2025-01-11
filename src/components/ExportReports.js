@@ -68,13 +68,11 @@ const ExportReports = () => {
       const reportDate = exportAll ? '' : selectedDate; 
 
       
-      const response = await getResources(`/api/generate-report/?id=${employeeId}&date=${reportDate}`);
+      const response = await fetch(`https://sistemag.onrender.com/api/generate-report/?id=${employeeId}&date=${reportDate}`);
 
-      if (response) {
-        const filename = `relatorio_vendas_${employeeId}_${reportDate || 'todos'}.${exportFormat}`;
-        downloadFile(response, filename);
-        setShowModal(false);
-        alert("Exportação realizada com sucesso!");
+      if (response.ok) {
+        window.open(response.url, '_blank');
+       
       } else {
         alert("Erro: Não foi possível gerar o relatório.");
       }

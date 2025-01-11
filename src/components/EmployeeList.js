@@ -131,21 +131,21 @@ const EmployeeList = ({ employees: initialEmployees, onAdd }) => {
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder="exemplo@gmail.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
             type="text"
-            placeholder="Contato"
+            placeholder="ex: 943919317"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
             required
           />
           <input
             type="text"
-            placeholder="Endereço"
+            placeholder="ex: Rua 1 de maio"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
@@ -154,6 +154,7 @@ const EmployeeList = ({ employees: initialEmployees, onAdd }) => {
           <option value="admin">Admin</option>
           <option value="employee">Funcionário</option>
           </select>
+          
           <input
             type="password"
             placeholder="Senha"
