@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/styles.css'; // Certifique-se de que o caminho esteja correto para o seu projeto
 import { getResources } from '../services/authService';
+import { API } from './API';
 
 const EmployeeDataTable = ({ employees = [], onEdit, onDelete, onAdd }) => {
     const [showForm, setShowForm] = useState(false);
@@ -9,14 +10,32 @@ const EmployeeDataTable = ({ employees = [], onEdit, onDelete, onAdd }) => {
     const [loading, setLoading] = useState(false); 
     const [isEditing, setIsEditing] = useState(false);
     const [currentEmployeeId, setCurrentEmployeeId] = useState(null);
+    const [sectors, setSectors] = useState([]);
+
 
     const token = localStorage.getItem('access');
 
-    const sectors = [
-        { value: '', label: 'Selecione um setor' },
-        { value: 'Mercearia', label: 'Mercearia' },
-        { value: 'Restaurante', label: 'Restaurante' },
-    ];
+    // const sectors = [
+    //     { value: '', label: 'Selecione um setor' },
+    //     { value: 'Mercearia', label: 'Mercearia' },
+    //     { value: 'Restaurante', label: 'Restaurante' },
+    // ];
+        // Função para buscar os setores da API
+    useEffect(() => {
+        const fetchSectors = async () => {
+        try {
+            const response = await fetch(`${API}/api/stock-references`); // Substitua pela URL correta
+            const data = await response.json();
+            setSectors(data);
+        } catch (error) {
+            console.error('Erro ao buscar setores:', error);
+        }
+        };
+
+        fetchSectors();
+    }, []);
+
+    
 
     const fetchData = async () => {
         setLoading(true);
@@ -42,7 +61,7 @@ const EmployeeDataTable = ({ employees = [], onEdit, onDelete, onAdd }) => {
         address: '',
         role: '',
         password: '',
-        sector: '',
+        stock_reference: '',
     });
 
     const handleAddClick = async () => {
@@ -88,7 +107,7 @@ const EmployeeDataTable = ({ employees = [], onEdit, onDelete, onAdd }) => {
             address: '',
             role: '',
             password: '',
-            sector: '',
+            stock_reference: '',
         });
     };
 
@@ -139,13 +158,12 @@ const EmployeeDataTable = ({ employees = [], onEdit, onDelete, onAdd }) => {
                                     onChange={(e) => setNewEmployee({ ...newEmployee, address: e.target.value })}
                                     required
                                 />
-                                <input
-                                    type="text"
-                                    placeholder="Função"
-                                    value={newEmployee.role}
-                                    onChange={(e) => setNewEmployee({ ...newEmployee, role: e.target.value })}
-                                    required
-                                />
+                                <select value={newEmployee.role} onChange={(e) => setNewEmployee({ ...newEmployee, role: e.target.value })} required>
+                                    <option value=''>Selecione a Função</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="employee">Funcionário</option>
+                                </select>
+
                                 <input
                                     type="password"
                                     placeholder="Senha"
@@ -154,16 +172,26 @@ const EmployeeDataTable = ({ employees = [], onEdit, onDelete, onAdd }) => {
                                     required
                                 />
                                 <select
-                                    value={newEmployee.sector}
-                                    onChange={(e) => setNewEmployee({ ...newEmployee, sector: e.target.value })}
                                     required
-                                >
+                                    value={newEmployee.stock_reference}
+                                    onChange={(e) => {
+                                        setNewEmployee((prev) => ({
+                                        ...prev,
+                                        stock_reference: e.target.value,
+                                        }));
+                                    }}
+                                    >
+                                    <option value="">Selecione um Setor</option>
                                     {sectors.map((sector) => (
-                                        <option key={sector.value} value={sector.value}>
-                                            {sector.label}
+                                        <option key={sector.id} value={sector.id}>
+                                        {sector.name}
                                         </option>
                                     ))}
-                                </select>
+                                    </select>
+                             
+
+
+
                                 <button type="submit">{isEditing ? 'Editar' : 'Adicionar'}</button>
                                 <button type="button" onClick={handleCloseForm}>Fechar</button>
                             </form>
@@ -199,7 +227,7 @@ const EmployeeDataTable = ({ employees = [], onEdit, onDelete, onAdd }) => {
                                         <td>{employee.contact}</td>
                                         <td>{employee.address}</td>
                                         <td>{employee.role === 'employee' ? 'Funcionário' : 'Administrador'}</td>
-                                        <td>{employee.sector || 'Não informado'}</td>
+                                        <td>{employee.stock_reference || 'Não informado'}</td>
                                         <td>
                                             <button onClick={() => handleEditClick(employee)}>Editar</button>
                                             <button onClick={() => handleDeleteClick(employee.id)}>Remover</button>

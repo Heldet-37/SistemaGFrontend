@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getResources } from '../services/authService';
+import { API } from './API';
 
 const PermissionsManager = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedSector, setSelectedSector] = useState('');
+  const [sectors, setSectors] = useState([]);
   const [employeeSectors, setEmployeeSectors] = useState({});
 
   const fetchData = async () => {
@@ -18,7 +20,7 @@ const PermissionsManager = () => {
     }
 
     try {
-      const data = await getResources('api/employee', token);
+      const data = await getResources('api/employee');
       setEmployees(data);
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
@@ -27,11 +29,29 @@ const PermissionsManager = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchSectors = async () => {
+      try {
+        const response = await fetch(`${API}/api/stock-references`);
+        const data = await response.json();
+        setSectors(data);
+      } catch (error) {
+        console.error('Erro ao buscar setores:', error);
+      }
+    };
+
+    fetchSectors();
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const handleUpdateSector = async (employeeId) => {
     const updatedSector = employeeSectors[employeeId] || '';
 
     try {
-      const response = await fetch(`api/employee/${employeeId}/sector`, {
+      const response = await fetch(`${API}/api/employee/${employeeId}/sector`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('access')}`,
@@ -51,36 +71,45 @@ const PermissionsManager = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const renderSectorSelection = (employee) => {
+    const selectedSectorRender = employeeSectors[employee.id] || ''; // Usa o setor selecionado para este funcionário
 
-  const renderSectorSelection = (employee) => (
-    <select
-      value={employeeSectors[employee.id] || employee.sector || ''}
-      onChange={(e) => {
-        setEmployeeSectors((prev) => ({
-          ...prev,
-          [employee.id]: e.target.value,
-        }));
-      }}
-    >
-      <option value="">Selecione um Setor</option>
-      <option value="mercearia">Mercearia</option>
-      <option value="restaurante">Restaurante</option>
-    </select>
-  );
+    return (
+      <select
+        value={selectedSectorRender}
+        onChange={(e) => {
+          const selectedSector = e.target.value;
+          setEmployeeSectors((prev) => ({
+            ...prev,
+            [employee.id]: selectedSector,
+          }));
+        }}
+      >
+        <option value="" disabled>Selecione um setor</option>
+        {sectors.map((sector) => (
+          <option key={sector.id} value={sector.id}>
+            {sector.name}
+          </option>
+        ))}
+      </select>
+    );
+  };
 
   const renderEmployees = () => {
     return employees
-      .filter((employee) => selectedSector === '' || employee.sector === selectedSector)
+      .filter((employee) => {
+        if (!selectedSector) return true; // Exibe todos se nenhum setor for selecionado
+        return employee.stock_reference === selectedSector;
+      })
       .map((employee) => (
         <tr key={employee.id}>
           <td>{employee.id}</td>
           <td>{employee.name}</td>
           <td>{renderSectorSelection(employee)}</td>
           <td>
-            <button onClick={() => handleUpdateSector(employee.id)}>Atualizar</button>
+            <button onClick={() => handleUpdateSector(employee.id)}>
+              Atualizar
+            </button>
           </td>
         </tr>
       ));
@@ -92,8 +121,11 @@ const PermissionsManager = () => {
 
       <select value={selectedSector} onChange={(e) => setSelectedSector(e.target.value)}>
         <option value="">Filtrar por Setor</option>
-        <option value="mercearia">Mercearia</option>
-        <option value="restaurante">Restaurante</option>
+        {sectors.map((sector) => (
+          <option key={sector.id} value={sector.id}>
+            {sector.name}
+          </option>
+        ))}
       </select>
 
       {loading ? (
