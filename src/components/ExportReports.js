@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getResources } from '../services/authService';
 import '../styles/styles.css'; // Arquivo de CSS atualizado
+import { API } from './API';
 
 const ExportReports = () => {
   const [salesData, setSalesData] = useState([]);
@@ -68,7 +69,7 @@ const ExportReports = () => {
       const reportDate = exportAll ? '' : selectedDate; 
 
       
-      const response = await fetch(`https://sistemag.onrender.com/api/generate-report/?id=${employeeId}&date=${reportDate}`);
+      const response = await fetch(`${API}/api/generate-report/?id=${employeeId}&date=${reportDate}`);
 
       if (response.ok) {
         window.open(response.url, '_blank');
